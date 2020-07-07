@@ -1,6 +1,6 @@
 package project.order;
 
-public class OrderUnitElements {
+public class OrderElementsUnit {
     /**
      * Единица измерения Миллиметр
      *

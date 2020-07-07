@@ -111,4 +111,33 @@ public class OrderElements {
         return "//input[@placeholder='Введите данные']";
     }
 
+    /**
+     * Поле добавить описание
+     *
+     * @return
+     */
+
+    public static String specification() {
+        return "//span[@class='step-two__element-input step-two__element-input_description']";
+    }
+
+    /**
+     * Поле Когда получать предложения: По факту
+     *
+     * @return
+     */
+
+    public static String receiveOffers() {
+        return "//p[text()='По факту появления']";
+    }
+
+    /**
+     * Поле Когда получать предложения: По дате завершения приема заявок
+     *
+     * @return
+     */
+
+    public static String endOffers() {
+        return "//p[text()='По дате завершения приема заявок']";
+    }
 }

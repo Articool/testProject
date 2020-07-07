@@ -1,6 +1,6 @@
 package project.order;
 
-public class OrderRegionElements {
+public class OrderElementsRegion {
 
     /**
      * Регион Москва
