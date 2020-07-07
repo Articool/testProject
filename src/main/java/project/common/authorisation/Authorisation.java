@@ -10,6 +10,7 @@ public class Authorisation {
         AuthorisationActions.clickPassword(); // Кликнули по полю пароль
         AuthorisationActions.sendPassword(password); // Ввели password пользователя
         AuthorisationActions.enterLogin(); // Нажали кнопку вход
+        AuthorisationActions.confirm();
     }
 }
 

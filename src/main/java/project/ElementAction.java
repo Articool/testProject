@@ -151,6 +151,7 @@ public class ElementAction {
         System.out.println("Введенный текст: " + textNow);
     }
 
+
     public static void clearSendKeys(WebElement element, String text){
         element.clear();
         element.sendKeys(text);
@@ -160,7 +161,7 @@ public class ElementAction {
         getDriver().findElement(By.xpath("//input[@name='" + xpath + "']")).sendKeys(text);
     }
 
-    public static String getAtribute(String xpath) {
+    public static String getAttribute(String xpath) {
         return getDriver().findElement(By.xpath(xpath)).getAttribute("class");
     }
 

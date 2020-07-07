@@ -4,6 +4,9 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import org.junit.Test;
+import project.common.authorisation.Authorisation;
+import project.common.authorisation.AuthorisationLogin;
+import project.order.Order;
 import project.setup.TestBase;
 
 public class TestOrder extends TestBase {
@@ -14,7 +17,8 @@ public class TestOrder extends TestBase {
     @Owner("Федоров И.В.")
     public void main() {
 
-     //   Authorisation.login(AuthorisationLogin.getUserEmailM2(), AuthorisationLogin.getUserPassword());
+        Authorisation.login(AuthorisationLogin.getUserEmailM2(), AuthorisationLogin.getUserPassword());
+        Order.newOrder();
 
     }
 }

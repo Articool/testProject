@@ -9,7 +9,6 @@ public class AuthorisationActions {
 
     /**
      * Клик по кнопке Вход домашней страницы
-     *
      */
 
     @Step("Кликаем по кнопке Вход")
@@ -26,17 +25,15 @@ public class AuthorisationActions {
 
     /**
      * Переключаемся в всплывающее окно (IFrame)
-     *
      */
 
     @Step("Переключаемся в IFrame")
     public static void switchIFrame() {
-       ElementAction.isVisibilitySwitchToIFrame(AuthorisationElements.iFrameHP());
+        ElementAction.isVisibilitySwitchToIFrame(AuthorisationElements.iFrameHP());
     }
 
     /**
      * Клик по полю логин
-     *
      */
 
     @Step("Клик по полю логин")
@@ -58,7 +55,6 @@ public class AuthorisationActions {
 
     /**
      * Клик по полю пароль
-     *
      */
 
     @Step("Клик по полю пароль")
@@ -82,9 +78,20 @@ public class AuthorisationActions {
 
     @Step("Нажимаем Вход")
     public static void enterLogin() {
-        AuthorisationElements.enterLoginButton();
+        ElementAction.click(AuthorisationElements.enterLoginButton());
         System.out.println("Нажимаем Вход");
     }
+
+    /**
+     * Нажимаем Подтвердить вход
+     */
+
+    @Step("Нажимаем Вход")
+    public static void confirm() {
+        ElementAction.click(AuthorisationElements.confirmLogin());
+        System.out.println("Нажимаем Вход");
+    }
+
 }
 
     

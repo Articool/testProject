@@ -56,4 +56,26 @@ public class AuthorisationElements {
     public static String enterLoginButton() {
         return "//div[@class='cc-card__actions']/button[@type='button']";
     }
+    /**
+     * enterLoginButton()
+     * Кнопка Подтвердить вход
+     *
+     * @return
+     */
+
+    public static String confirmLogin() {
+        return "//span[text()='Подтвердить вход']";
+    }
+
+    /**
+     * enterLoginButton()
+     * Кнопка Выход из аккаунта
+     *
+     * @return
+     */
+
+    public static String logoutLogin() {
+        return "//span[text()='Выход из аккаунта']";
+    }
+
 }

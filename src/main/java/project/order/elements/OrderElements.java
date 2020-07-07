@@ -1,4 +1,4 @@
-package project.order;
+package project.order.elements;
 
 public class OrderElements {
     /**
@@ -22,7 +22,7 @@ public class OrderElements {
     }
 
     /**
-     * Верхняя категория
+     * Верхняя категория из списка, после поиска
      *
      * @return
      */
