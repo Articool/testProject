@@ -100,6 +100,7 @@ public class OrderElements {
     public static String minusCount() {
         return "//button[@class='counter__button counter__button_position_left']";
     }
+
     /**
      * Выбор единицы измерения
      *
@@ -109,6 +110,5 @@ public class OrderElements {
     public static String unit() {
         return "//input[@placeholder='Введите данные']";
     }
-
 
 }
