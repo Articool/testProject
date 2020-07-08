@@ -1,21 +1,19 @@
 package project.order.elements;
 
+import project.ElementXpath;
+
 public class OrderElementsCalendar {
 
     /**
      * Кнопка календаря Дата завершения приема заявок
-     *
-     * @return
      */
 
     public static String calendarDateApplication() {
-        return "//input[@name='replyUntil']/../../div[@class='common-input-box__wrapper']";
+        return ElementXpath.inputName("replyUntil']/../../div[@class='common-input-box__wrapper");
     }
 
     /**
      * Кнопка календаря Дата выбора победителя
-     *
-     * @return
      */
 
     public static String calendarDateWin() {
@@ -24,8 +22,6 @@ public class OrderElementsCalendar {
 
     /**
      * Кнопка календаря Дата поставки
-     *
-     * @return
      */
 
     public static String calendarDateDelivery() {
@@ -34,8 +30,6 @@ public class OrderElementsCalendar {
 
     /**
      * Выбор следующего месяца в календаре
-     *
-     * @return
      */
 
     public static String calendarNextMoth() {
@@ -44,8 +38,6 @@ public class OrderElementsCalendar {
 
     /**
      * Выбор прошлого месяца в календаре
-     *
-     * @return
      */
 
     public static String calendarLastMoth() {
@@ -53,34 +45,27 @@ public class OrderElementsCalendar {
     }
 
     /**
-     * Выбор дня в календаре 27
-     *
-     * @return
+     * Выбор дня в календаре
+     * В day передать дату 1-31 в зависимости от месяца в формате String
      */
 
-    public static String calendarSelectDay() {
-        return "//span[text()='27']";
+    public static String calendarSelectDay(String day) {
+        return ElementXpath.spanText(day);
     }
 
     /**
      * Кнопка применить изменения в календаре
-     *
-     * @return
      */
 
     public static String calendarApply() {
-        return "//span[text()='Применить']";
+        return ElementXpath.spanText("Применить");
     }
 
     /**
      * Кнопка сбросить изменения в календаре
-     *
-     * @return
      */
 
     public static String calendarReset() {
-        return "//span[text()='Сбросить']";
+        return ElementXpath.spanText("Сбросить");
     }
-
-
 }

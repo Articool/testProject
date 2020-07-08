@@ -6,10 +6,10 @@ import io.qameta.allure.Owner;
 import org.junit.Test;
 import project.common.authorisation.Authorisation;
 import project.common.authorisation.AuthorisationLogin;
-import project.order.Order;
+import project.order.OrderCases;
 import project.setup.TestBase;
 
-public class TestOrder extends TestBase {
+public class TestOrderCases extends TestBase {
 
     @Test
     @Feature("Юридическое лицо РФ")
@@ -18,7 +18,7 @@ public class TestOrder extends TestBase {
     public void main() {
 
         Authorisation.login(AuthorisationLogin.getUserEmailM2(), AuthorisationLogin.getUserPassword());
-        Order.newOrder();
+        OrderCases.newOrder();
 
     }
 }

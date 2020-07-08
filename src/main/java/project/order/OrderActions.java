@@ -4,7 +4,8 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import project.ElementAction;
 import project.order.elements.OrderElements;
-import project.order.elements.OrderElementsRegion;
+import project.order.elements.OrderElementsCalendar;
+import project.order.elements.OrderElementsUnit;
 
 
 public class OrderActions {
@@ -45,12 +46,13 @@ public class OrderActions {
     /**
      * Очистка поисковой строки наименования категории
      * Ввод искомой категории
+     * Добавить текст
      */
 
     @Step("Очистка поисковой строки наименования категории, Ввод искомой категории")
-    public static void clearSendCategorySearch() {
+    public static void clearSendCategorySearch(String text) {
 
-        ElementAction.clearSendKeys(OrderElements.searchCategory(), "Механизмы исполнительные");
+        ElementAction.clearSendKeys(OrderElements.searchCategory(), text);
     }
 
     /**
@@ -94,39 +96,138 @@ public class OrderActions {
     }
 
     /**
-     * Клик по полю поиска Выбрать регион
+     * Клик по полю поиска Выбрать регион.
+     * Вставить xpath из класса OrderElementsRegion
      */
 
-    @Step("Клик по полю Выбрать регион")
-    public static void clickRegionMoscow() {
-        ElementAction.isVisibilityIsClickable(OrderElementsRegion.regionMoscow());
+    @Step("Клик по выподающему списку и выбора значения из него")
+    public static void clickRegion(String xpath) {
+        ElementAction.isVisibilityIsClickableClick(xpath);
     }
 
     /**
      * Клик по полю Цена без НДС мин. и ввод значения
+     * Добавить String значение, минимальную цену
      */
 
-    @Step("Клик по полю Выбрать регион")
-    public static void clickSendPriceMin() {
-        ElementAction.clearSendKeys(OrderElements.selectPriceMin(), "500");
+    @Step("Клик по полю Цена без НДС мин. и ввод значения")
+    public static void clickSendPriceMin(String priceMin) {
+        ElementAction.clearSendKeys(OrderElements.selectPriceMin(), priceMin);
     }
+
     /**
      * Клик по полю Цена без НДС макс. и ввод значения
+     * Добавить String значение, максимальную цену
      */
 
-    @Step("Клик по полю Выбрать регион")
-    public static void clickSendPriceMax() {
-        ElementAction.clearSendKeys(OrderElements.selectPriceMin(), "600");
+    @Step("Клик по полю Цена без НДС макс. и ввод значения")
+    public static void clickSendPriceMax(String priceMax) {
+        ElementAction.clearSendKeys(OrderElements.selectPriceMax(), priceMax);
     }
+
     /**
      * Клик по Прибавлению количества
+     * Передать количество кликов по прибавлению количества 1 до 100
      */
 
-    @Step("Клик по полю Выбрать регион")
-    public static void clickPlusCount() {
-        for(int i = 0; i<90; i++){
+    @Step("Клик по Прибавлению количества")
+    public static void clickPlusCount(int count) {
+        for (int i = 0; i < count; i++) {
             ElementAction.click(OrderElements.plusCount());
         }
 
     }
+
+    /**
+     * Клик по полю Ед.Измерения
+     */
+
+    @Step("Клик по полю Ед.Измерения")
+    public static void clickUnit() {
+        ElementAction.click(OrderElements.unit());
+    }
+
+    /**
+     * Выбор единицы измерения из выпадающего справочника
+     * Передать xpath из Класса OrderElementsUnit
+     */
+
+    @Step("Выбор единицы измерения из выпадающего справочника")
+    public static void clickSelectUnit(String xpath) {
+        ElementAction.isVisibilityIsClickableClick(xpath);
+    }
+
+    /**
+     * Клик по выбору даты завершения приема заявок
+     */
+
+    @Step("Клик по выбору даты завершения приема заявок")
+    public static void clickDateEndApplication() {
+        ElementAction.isVisibilityIsClickableClick(OrderElementsCalendar.calendarDateApplication());
+    }
+
+    /**
+     * +1 месяц к текущему месяцу
+     */
+
+    @Step("+1 месяц к текущему даты завершения приема заявок")
+    public static void clickSelectMoth() {
+        ElementAction.isVisibilityIsClickableClick(OrderElementsCalendar.calendarNextMoth());
+    }
+
+    /**
+     * Выбор конечной даты
+     * Передать xpath из класса OrderElementCalendar метод calendarSelectDay
+     */
+
+    @Step("Выбор даты завершения приема заявок.")
+    public static void clickSelectDate(String xpath) {
+        ElementAction.isVisibilityIsClickableClick(xpath);
+    }
+
+    /**
+     * Клик по кнопке применить изменения в дате
+     */
+
+    @Step("Клик по кнопке применить изменения в дате")
+    public static void clickApplyDate() {
+        ElementAction.click(OrderElementsCalendar.calendarApply());
+    }
+
+
+    /**
+     * Клик по выбору даты выбора победителя
+     */
+
+    @Step("Клик по выбору даты выбора победителя")
+    public static void clickDateWin() {
+        ElementAction.isVisibilityIsClickableClick(OrderElementsCalendar.calendarDateWin());
+    }
+
+    /**
+     * Клик по выбору даты доставки
+     */
+
+    @Step("Клик по выбору даты доставки")
+    public static void clickDateDelivery() {
+        ElementAction.isVisibilityIsClickableClick(OrderElementsCalendar.calendarDateDelivery());
+    }
+    /**
+     * Клик по выбору даты доставки
+     */
+
+    @Step("Клик по выбору даты доставки")
+    public static void clickSpecification() {
+        ElementAction.click(OrderElements.specification());
+    }
+    /**
+     * Клик по выбору даты доставки
+     */
+
+    @Step("Клик по выбору даты доставки")
+    public static void sendSpecification() {
+        ElementAction.sendKeysXpath(OrderElements.specification(),"Тест 64346");
+    }
 }
+
+

@@ -1,81 +1,77 @@
 package project.common.authorisation;
 
+import project.ElementXpath;
+
 public class AuthorisationElements {
 
     /**
      * enterButton()
      * Кнопка для открытия iFrame ввода логина и пароля
      *
-     * @return
      */
 
     public static String enterButton() {
-        return "//span[text()='Войти']/..";
+        return ElementXpath.spanText("Войти");
     }
 
     /**
      * iFrameHP()
      * Работа с iFrame с всплывающим окном
      *
-     * @return
      */
 
     public static String iFrameHP() {
-        return "//iframe[@class='login-dialog__iframe']";
+        return ElementXpath.iFrame("login-dialog__iframe");
     }
 
     /**
      * login()
      * Поле ввода логина
      *
-     * @return
      */
 
     public static String login() {
-        return "//input[@name='email']";
+        return ElementXpath.inputName("email");
     }
 
     /**
      * password()
      * Поле ввода пароля
      *
-     * @return
      */
 
     public static String password() {
-        return "//input[@name='password']";
+        return ElementXpath.inputName("password");
     }
 
     /**
      * enterLoginButton()
      * Кнопка Вход по паролю
      *
-     * @return
      */
 
     public static String enterLoginButton() {
-        return "//div[@class='cc-card__actions']/button[@type='button']";
+        return ElementXpath.divClass("cc-card__actions']/button[@type='button");
     }
+
     /**
      * enterLoginButton()
      * Кнопка Подтвердить вход
      *
-     * @return
      */
 
     public static String confirmLogin() {
-        return "//span[text()='Подтвердить вход']";
+        return ElementXpath.spanText("Подтвердить вход");
     }
 
     /**
-     * enterLoginButton()
+     * logoutLogin()
      * Кнопка Выход из аккаунта
      *
-     * @return
      */
 
     public static String logoutLogin() {
-        return "//span[text()='Выход из аккаунта']";
+        return ElementXpath.spanText("Выход из аккаунта");
     }
 
 }

@@ -150,7 +150,11 @@ public class ElementAction {
         String textNow = getDriver().findElement(By.xpath(xpath)).getAttribute("value");
         System.out.println("Введенный текст: " + textNow);
     }
-
+    public static void sendKeysXpath(String xpath, String text){
+        getDriver().findElement(By.xpath(xpath)).sendKeys(text);
+        String textNow = getDriver().findElement(By.xpath(xpath)).getAttribute("value");
+        System.out.println("Введенный текст: " + textNow);
+    }
 
     public static void clearSendKeys(WebElement element, String text){
         element.clear();

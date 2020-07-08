@@ -1,143 +1,141 @@
 package project.order.elements;
 
+import project.ElementXpath;
+
 public class OrderElements {
+
+    //TODO Удалить 1
+
     /**
      * Кнопка "Создать заказ"
-     *
-     * @return
      */
-
     public static String newOrder() {
-        return "//div[text()='Создать заказ']";
+        return ElementXpath.divText("Создать заказ");
     }
 
     /**
-     * Поиск выбора категории
-     *
-     * @return
+     * Поиск выбора категории Заказов
      */
 
     public static String searchCategory() {
-        return "//input[@placeholder='Наименование категории']";
+        return ElementXpath.inputPlaceholder("Наименование категории");
     }
 
     /**
-     * Верхняя категория из списка, после поиска
-     *
-     * @return
+     * Выбор самой верхней категории после поиска
      */
 
     public static String topCategory() {
-        return "//span[@class='step-one__search']";
+        return ElementXpath.spanClass("step-one__search");
     }
 
     /**
      * Кнопка Далее на форме выбора категории
-     *
-     * @return
      */
 
     public static String buttonNext() {
-        return "//span[text()='Далее']";
+        return ElementXpath.spanText("Далее");
     }
 
     /**
      * Выбор региона доставки
-     *
-     * @return
      */
 
     public static String selectRegion() {
-        return "//input[@placeholder='Выбрать регион']";
+        return ElementXpath.inputPlaceholder("Выбрать регион");
+    }
+
+    /**
+     * Выбор региона
+     * Передать значение String из справочника DirectoryRegion
+     */
+
+    public static String optionRegion(String text) {
+        return ElementXpath.divText(text);
     }
 
     /**
      * Выбор цены мин.
-     *
-     * @return
      */
 
     public static String selectPriceMin() {
-        return "//input[@placeholder='Мин.']";
+        return ElementXpath.inputPlaceholder("Мин.");
     }
 
     /**
      * Выбор цены макс.
-     *
-     * @return
      */
 
+
     public static String selectPriceMax() {
-        return "//input[@placeholder='Макс.']";
+        return ElementXpath.inputPlaceholder("Макс.");
     }
 
     /**
-     * Выбор количества
-     *
-     * @return
+     * Выбор количества товара
      */
 
     public static String selectCount() {
-        return "//input[@value='1']";
+        return ElementXpath.inputValue("1");
     }
 
     /**
-     * Прибавление количества
-     *
-     * @return
+     * Прибавление количества товара
      */
 
     public static String plusCount() {
-        return "//button[@class='counter__button counter__button_position_right']";
+        return ElementXpath.buttonClass("counter__button counter__button_position_right");
     }
 
     /**
-     * Уменьшение количества
-     *
-     * @return
+     * Уменьшение количества товара
      */
 
     public static String minusCount() {
-        return "//button[@class='counter__button counter__button_position_left']";
+        return ElementXpath.buttonClass("counter__button counter__button_position_left");
     }
 
     /**
      * Выбор единицы измерения
-     *
-     * @return
      */
 
     public static String unit() {
-        return "//input[@placeholder='Введите данные']";
+        return ElementXpath.inputPlaceholder("Введите данные");
     }
 
     /**
      * Поле добавить описание
-     *
-     * @return
      */
 
-    public static String specification() {
+    public static String specification1() {
         return "//span[@class='step-two__element-input step-two__element-input_description']";
+    }
+
+    public static String specification() {
+        return ElementXpath.spanClass("step-two__element-input step-two__element-input_description");
     }
 
     /**
      * Поле Когда получать предложения: По факту
-     *
-     * @return
      */
 
-    public static String receiveOffers() {
+    public static String receiveOffers1() {
         return "//p[text()='По факту появления']";
+    }
+
+    public static String receiveOffers() {
+        return ElementXpath.pText("По факту появления");
     }
 
     /**
      * Поле Когда получать предложения: По дате завершения приема заявок
-     *
-     * @return
      */
 
-    public static String endOffers() {
+    public static String endOffers1() {
         return "//p[text()='По дате завершения приема заявок']";
+    }
+
+    public static String endOffers() {
+        return ElementXpath.pText("По дате завершения приема заявок");
     }
 }

@@ -1,5 +1,7 @@
 package project.order.elements;
 
+import java.util.Date;
+
 public class OrderElementsUnit {
     /**
      * Единица измерения Миллиметр
@@ -44,5 +46,10 @@ public class OrderElementsUnit {
      */
     public static String unitThing() {
         return "//div[text()='Штука']";
+    }
+
+    public static long getDateTime() {
+        Date date = new Date();
+        return date.getTime();
     }
 }
