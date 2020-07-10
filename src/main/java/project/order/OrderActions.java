@@ -3,9 +3,10 @@ package project.order;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import project.ElementAction;
+import project.ElementXpath;
 import project.order.elements.OrderElements;
 import project.order.elements.OrderElementsCalendar;
-import project.order.elements.OrderElementsUnit;
+import project.order.elements.OrderElements;
 
 
 public class OrderActions {
@@ -51,7 +52,6 @@ public class OrderActions {
 
     @Step("Очистка поисковой строки наименования категории, Ввод искомой категории")
     public static void clearSendCategorySearch(String text) {
-
         ElementAction.clearSendKeys(OrderElements.searchCategory(), text);
     }
 
@@ -61,7 +61,6 @@ public class OrderActions {
 
     @Step("Клик по 1 найденной категории")
     public static void clickTopCategory() {
-
         ElementAction.click(OrderElements.topCategory());
     }
 
@@ -71,71 +70,50 @@ public class OrderActions {
 
     @Step("Клик по кнопке Далее")
     public static void clickNextButton() {
-
         ElementAction.click(OrderElements.buttonNext());
     }
 
     /**
-     * Очистка поля Выбрать регион
-     */
-
-    @Step("Очистка поля Выбрать регион")
-    public static void clearRegionSearch() {
-
-        ElementAction.clear(OrderElements.selectRegion());
-    }
-
-    /**
-     * Клик по полю поиска Выбрать регион
-     */
-
-    @Step("Клик по полю Выбрать регион")
-    public static void clickRegionSearch() {
-
-        ElementAction.click(OrderElements.selectRegion());
-    }
-
-    /**
+     * Очистка поля поиска Выбрать регион.
      * Клик по полю поиска Выбрать регион.
-     * Вставить xpath из класса OrderElementsRegion
+     * Выбор региона из выпадающего списка
      */
-
-    @Step("Клик по выподающему списку и выбора значения из него")
+    @Step("Клик по полю Выбрать регион")
     public static void clickRegion(String xpath) {
+        ElementAction.clear(OrderElements.selectRegion());
+        ElementAction.click(OrderElements.selectRegion());
         ElementAction.isVisibilityIsClickableClick(xpath);
     }
 
     /**
      * Клик по полю Цена без НДС мин. и ввод значения
      * Добавить String значение, минимальную цену
-     */
-
-    @Step("Клик по полю Цена без НДС мин. и ввод значения")
-    public static void clickSendPriceMin(String priceMin) {
-        ElementAction.clearSendKeys(OrderElements.selectPriceMin(), priceMin);
-    }
-
-    /**
-     * Клик по полю Цена без НДС макс. и ввод значения
      * Добавить String значение, максимальную цену
      */
 
-    @Step("Клик по полю Цена без НДС макс. и ввод значения")
-    public static void clickSendPriceMax(String priceMax) {
+    @Step("Клик по полю Цена без НДС мин. и ввод значения")
+    public static void clickSendPrice(String priceMin, String priceMax) {
+        ElementAction.clearSendKeys(OrderElements.selectPriceMin(), priceMin);
         ElementAction.clearSendKeys(OrderElements.selectPriceMax(), priceMax);
     }
 
+
     /**
-     * Клик по Прибавлению количества
+     * clickCount(int type, int count)
+     * Поле по редактированию количества
+     * Требуется передать два значения
+     * 1) В int type - 1 = MINUS Уменьшает количество товара,
+     * 2 = PLUS Прибавляет количество товара
+     *
+     * 2) В int count - передаем колиство прибавлений либо уменьшений
      * Передать количество кликов по прибавлению количества 1 до 100
      */
 
     @Step("Клик по Прибавлению количества")
-    public static void clickPlusCount(int count) {
+    public static void clickCount(int type, int count) {
         for (int i = 0; i < count; i++) {
-            ElementAction.click(OrderElements.plusCount());
+            ElementAction.click(OrderElements.amountOfGoods(type));
         }
-
     }
 
     /**
@@ -144,7 +122,7 @@ public class OrderActions {
 
     @Step("Клик по полю Ед.Измерения")
     public static void clickUnit() {
-        ElementAction.click(OrderElements.unit());
+        ElementAction.click(OrderElements.typeUnit());
     }
 
     /**
@@ -167,13 +145,19 @@ public class OrderActions {
     }
 
     /**
-     * +1 месяц к текущему месяцу
+     * +1 месяц к текущему месяцу в календаре
      */
 
     @Step("+1 месяц к текущему даты завершения приема заявок")
     public static void clickSelectMoth() {
-        ElementAction.isVisibilityIsClickableClick(OrderElementsCalendar.calendarNextMoth());
+        try {
+            ElementAction.sleep(1000);
+            ElementAction.isVisibilityIsClickableClick(OrderElementsCalendar.calendarNextMoth());
+        } catch (Exception e) {
+            Allure.step(e.getMessage());
+        }
     }
+
 
     /**
      * Выбор конечной даты
@@ -212,22 +196,155 @@ public class OrderActions {
     public static void clickDateDelivery() {
         ElementAction.isVisibilityIsClickableClick(OrderElementsCalendar.calendarDateDelivery());
     }
+
     /**
-     * Клик по выбору даты доставки
+     * Клик по полю добавить описание
+     * Заполнение описание Тест + текущая локальная дата и время
      */
 
-    @Step("Клик по выбору даты доставки")
+    @Step("Клик по полю добавить описание, ввод описания")
     public static void clickSpecification() {
-        ElementAction.click(OrderElements.specification());
+        ElementAction.isVisibilityIsClickableSendKeysXpath(OrderElements.specification(),
+                "UI Autotest. event time: " + ElementAction.getDate());
     }
+
     /**
-     * Клик по выбору даты доставки
+     * Выбор Условия оплаты
+     * Вставить значение int от 1 до 4
+     * 1 = По предоплате
+     * 2 = По факту получения
+     * 3 = С отсрочкой платежа
+     * 4 = Другое
+     * В переменную type передать знаечние int c типом условия оплаты
+     * Ввести в payPrepayment размер предоплаты от 1 до 100 значение String
+     * @return ElementXpath.divText(typeUnit)
      */
 
-    @Step("Клик по выбору даты доставки")
-    public static void sendSpecification() {
-        ElementAction.sendKeysXpath(OrderElements.specification(),"Тест 64346");
+    @Step("Выбор Условия оплаты")
+    public static String typePay(int type) {
+        String typeUnit = "";
+        switch (type){
+            case 1:
+                typeUnit = "По предоплате";
+                ElementAction.isVisibilityIsClickableClick(OrderElements.pay());
+                ElementAction.isVisibilityIsClickableClick(OrderElements.typePay(type));
+                ElementAction.isVisibilityIsClickableClick(OrderElements.typePayAmount(type));
+                ElementAction.sendKeysXpath(OrderElements.typePayAmount(type), "52"); // Тут можно ввести размер предоплаты от 1 до 100
+                break;
+            case 2:
+                typeUnit = "По факту получения";
+                ElementAction.isVisibilityIsClickableClick(OrderElements.pay());
+                ElementAction.isVisibilityIsClickableClick(OrderElements.typePay(type));
+                break;
+            case 3:
+                typeUnit = "С отсрочкой платежа";
+                ElementAction.isVisibilityIsClickableClick(OrderElements.pay());
+                ElementAction.isVisibilityIsClickableClick(OrderElements.typePay(type));
+                ElementAction.isVisibilityIsClickableClick(OrderElements.typePayAmount(type));
+                ElementAction.sendKeysXpath(OrderElements.typePayAmount(type), "33"); // Тут можно ввести срок отсрочки платежа кал.дн
+                break;
+            case 4:
+                typeUnit = "Другое";
+                ElementAction.isVisibilityIsClickableClick(OrderElements.pay());
+                ElementAction.isVisibilityIsClickableClick(OrderElements.typePay(type));
+                ElementAction.isVisibilityIsClickableClick(OrderElements.typePayAmount(type));
+                ElementAction.sendKeysXpath(OrderElements.typePayAmount(type), "Тест описания условий оплаты"); // Тут можно ввести Описание условий оплаты
+
+                break;
+        }
+        return ElementXpath.divText(typeUnit);
     }
+    //------------------------------------------------------------------------------------------
+
+    /**
+     * Клик добавить дополнительные требования
+     */
+
+    @Step("Клик по полю условие оплаты,Выбор условия С отсрочкой платежа")
+    public static void clickAddNewRequirements() {
+        ElementAction.isVisibilityIsClickableClick(OrderElements.addRequirements());
+    }
+
+    /**
+     * Ввод наименования дополнительного требования
+     */
+
+    @Step("Ввод наименования дополнительного требования")
+    public static void addNameRequirements(String text) {
+        ElementAction.isVisibilityIsClickableClickSendKeysXpath(OrderElements.addRequirementsName(), text);
+    }
+
+    /**
+     * Ввод описания дополнительного требования
+     */
+
+    @Step("Ввод описания дополнительного требования")
+    public static void addSpecificationRequirements(String text) {
+        ElementAction.isVisibilityIsClickableClickSendKeysXpath(OrderElements.addRequirementsSpecification(), text);
+    }
+
+    /**
+     * Удаление дополнительного требования
+     */
+
+    @Step("Ввод описания дополнительного требования")
+    public static void deleteRequirements() {
+        ElementAction.isVisibilityIsClickableClick(OrderElements.buttonDeleteRequirements());
+    }
+
+    /**
+     * Выбор получения предложения: По факту появления
+     * Ожидание выставлено специально для ожидания окончания загрузки документов
+     * В переменную type передать знаечние int c типом функции где:
+     * 1 = По факту появлени
+     * 2 = Прибавляет количество товара
+     */
+
+    @Step("Выбор получения предложения")
+    public static void receivingOffer(int type) {
+
+        try {
+            ElementAction.sleep(1000);
+            ElementAction.isVisibilityIsClickableClick(OrderElements.receiveOffers(type));
+        } catch (Exception e) {
+            Allure.step(e.getMessage());
+        }
+    }
+
+    /**
+     * Клик по кнопке Отправить заказ
+     */
+
+    @Step("Клик по кнопке Отправить заказ")
+    public static void sendOffer() {
+        ElementAction.isVisibilityIsClickableClick(OrderElements.buttonSendOffer());
+    }
+
+    /**
+     * Клик по кнопке перейти к заказу
+     */
+
+    @Step("Ввод описания дополнительного требования")
+    public static void clickGoToOrder() {
+        ElementAction.isVisibilityIsClickableClick(OrderElements.buttonGoToOrder());
+    }
+
+    /**
+     * Клик по кнопке добавить файл
+     * Загрузка документа
+     */
+
+    @Step("Ввод описания дополнительного требования")
+    public static void clickUploadDoc(String text) {
+
+        try {
+            ElementAction.sleep(2000);
+            ElementAction.sendKeysXpath(OrderElements.buttonUploadFile(), text);
+        } catch (Exception e) {
+            Allure.step(e.getMessage());
+        }
+    }
+
 }
 
 

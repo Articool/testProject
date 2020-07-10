@@ -82,6 +82,17 @@ public class ElementXpath {
     }
 
     /**
+     * inputClass()
+     * Шаблон элемента xpath
+     * inputClass[@class="Вставляемый текст"]
+     */
+
+    public static String inputClass(String text) {
+        return "//input[@class='" + text + "']";
+    }
+
+
+    /**
      * iFrame()
      * Шаблон элемента xpath
      * iframe[@class="Вставляемый текст"]
@@ -101,4 +112,24 @@ public class ElementXpath {
         return "//p[text()='" + text + "']";
     }
 
+    /**
+     * textareaPlaceholder()
+     * Шаблон элемента xpath
+     * textarea[@placeholder="Вставляемый текст"]
+     */
+
+    public static String textareaPlaceholder(String text) {
+        return "//textarea[@placeholder='" + text + "']";
+    }
+
+    /**
+     * textareaClass()
+     * Шаблон элемента xpath
+     * textarea[@class="Вставляемый текст"]
+     */
+
+    public static String textareaClass(String text) {
+        return "//textarea[@class='" + text + "']";
+    }
+//textarea[@class='step-two__text-input step-two__text-input_req-description']
 }

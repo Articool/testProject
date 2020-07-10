@@ -50,10 +50,10 @@ public abstract class TestBase {
 
         /**
          * Правило выполняется в случае если тест прошел не удачно
-         * @param e
+ //        * @param e
          * @param description
          */
-        @Override
+ /*       @Override
         protected void failed(Throwable e, Description description) {
         //    System.out.println(DateFormat.plusDay(0,"yyyy-MM-dd'T'HH:mm:ssZ"));
 
@@ -83,7 +83,7 @@ public abstract class TestBase {
         protected void finished(Description description) {
             String sessionID = ((RemoteWebDriver) DriverBase.getDriver()).getSessionId().toString();
             if (DriverBase.getDriver() != null) {
-                DriverBase.getDriver().quit();
+              //  DriverBase.getDriver().quit();
             }
 
             if(fail & enableVideo) {

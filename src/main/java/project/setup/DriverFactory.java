@@ -57,8 +57,8 @@ public class DriverFactory {
         chromePrefs.put("safebrowsing.enabled", "true");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
-        options.setExperimentalOption("prefs", chromePrefs);
-        options.addExtensions(new File("File/1.2.7.crx"));
+        //options.setExperimentalOption("prefs", chromePrefs);
+       // options.addExtensions(new File("File/1.2.7.crx"));
 
         System.setProperty("webdriver.chrome.driver", "E:/Programmer/chrome/chromedriver.exe");
         driver = new ChromeDriver(options);

@@ -17,7 +17,7 @@ public class TestOrderCases extends TestBase {
     @Owner("Федоров И.В.")
     public void main() {
 
-        Authorisation.login(AuthorisationLogin.getUserEmailM2(), AuthorisationLogin.getUserPassword());
+        Authorisation.login(AuthorisationLogin.getUserEmailM3(), AuthorisationLogin.getUserPassword());
         OrderCases.newOrder();
 
     }

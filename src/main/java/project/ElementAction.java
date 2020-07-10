@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -122,6 +123,21 @@ public class ElementAction {
         isClickable(xpath);
         isVisibility(xpath);
     }
+    public static void isVisibilityIsClickableSendKeysXpath(String xpath, String text){
+        isClickable(xpath);
+        isVisibility(xpath);
+        getDriver().findElement(By.xpath(xpath)).sendKeys(text);
+        String textNow = getDriver().findElement(By.xpath(xpath)).getAttribute("value");
+        System.out.println("Введенный текст: " + textNow);
+    }
+
+    public static void isVisibilityIsClickableClickSendKeysXpath(String xpath, String text){
+        isVisibilityIsClickable(xpath);
+        click(xpath);
+        getDriver().findElement(By.xpath(xpath)).sendKeys(text);
+        String textNow = getDriver().findElement(By.xpath(xpath)).getAttribute("value");
+        System.out.println("Введенный текст: " + textNow);
+    }
 
     public static void isVisibilityIsClickableClick(String xpath, String waitXpath){
         isVisibilityIsClickable(xpath);
@@ -231,5 +247,13 @@ public class ElementAction {
         } catch (Exception e) {
             return  false;
         }
+    }
+    /**
+     * Get date передает локальную дату
+     */
+
+    public static String getDate(){
+        Date date = new Date();
+        return date.toString();
     }
 }
